@@ -56,7 +56,7 @@ export default {
         newScale = 1;
       }
       gsap
-        .to(this.$data, { duration: 3, scale: newScale, ease: "slow" })
+        .to(this.$data, { duration: this.duration, scale: newScale, ease: "slow" })
         .delay(0.3);
 
       setTimeout(() => {
