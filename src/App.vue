@@ -1,56 +1,61 @@
 <template>
   <div id="app" :class="{dark: isDarkMode, light: !isDarkMode}">
-    <div>
-      <input class="button" type="button" :value="modeText" @click="toggleTheme" />
+    <div class="burger">
+      <Slide right>
+        <div class="menu">
+          <input class="button" type="button" :value="modeText" @click="toggleTheme" />
+          <div>
+            <p>Duration</p>
+            <input
+              class="button"
+              type="button"
+              value="3"
+              @click="setDuration"
+              :class="{active: duration == 3}"
+            />
+            <input
+              class="button"
+              type="button"
+              value="4"
+              @click="setDuration"
+              :class="{active: duration == 4}"
+            />
+            <input
+              class="button"
+              type="button"
+              value="5"
+              @click="setDuration"
+              :class="{active: duration == 5}"
+            />
+            <input
+              class="button"
+              type="button"
+              value="6"
+              @click="setDuration"
+              :class="{active: duration == 6}"
+            />
+          </div>
+          <p>
+            <a
+              href="https://www.healthline.com/health/box-breathing"
+            >Read more about the box breathing technique here.</a>
+          </p>
+        </div>
+      </Slide>
     </div>
     <Breathe :duration="duration" />
-
-    <div>
-      <p>Duration</p>
-      <input
-        class="button"
-        type="button"
-        value="3"
-        @click="setDuration"
-        :class="{active: duration == 3}"
-      />
-      <input
-        class="button"
-        type="button"
-        value="4"
-        @click="setDuration"
-        :class="{active: duration == 4}"
-      />
-      <input
-        class="button"
-        type="button"
-        value="5"
-        @click="setDuration"
-        :class="{active: duration == 5}"
-      />
-      <input
-        class="button"
-        type="button"
-        value="6"
-        @click="setDuration"
-        :class="{active: duration == 6}"
-      />
-    </div>
-    <p>
-      <a
-        href="https://www.healthline.com/health/box-breathing"
-      >Read more about the box breathing technique here.</a>
-    </p>
   </div>
 </template>
 
 <script>
 import Breathe from "./components/Breathe.vue";
+import { Slide } from "vue-burger-menu";
 
 export default {
   name: "App",
   components: {
-    Breathe
+    Breathe,
+    Slide
   },
   data() {
     return {
@@ -81,11 +86,21 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
+  height: 100vh;
   transition: background-color 0.5s;
+    display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.menu {
   display: flex;
   flex-direction: column;
-  align-content: center;
   justify-content: space-evenly;
 }
 
@@ -99,18 +114,12 @@ export default {
   background-color: white;
 }
 
-#app.dark a,
-#app.dark a:visited {
-  color: white !important;
+a, a:visited {
+  color: white;
 }
 
-#app.light a,
-#app.light a:visited {
-  color: #2c3e50;
-}
 
 .button {
-  max-width: 10rem;
   /* default for <button>, but useful for <a> */
   display: inline-block;
   text-align: center;
@@ -138,8 +147,7 @@ export default {
 }
 
 body {
-  margin: 0;
   padding: 0;
-  height: 100vh;
+  margin: 0;
 }
 </style>

@@ -88,6 +88,6 @@ svg {
 }
 
 .breathe {
-	margin: 2rem;
+	padding: 6rem 2rem;
 }
 </style>

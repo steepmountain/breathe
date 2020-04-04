@@ -10,7 +10,8 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "gsap": "^3.2.6",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-burger-menu": "^2.0.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.2.0",
