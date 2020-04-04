@@ -85,6 +85,9 @@ export default {
 </script>
 
 <style>
+.bm-burger-bars {
+    background-color: #999dad;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
