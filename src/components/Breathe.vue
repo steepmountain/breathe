@@ -2,7 +2,7 @@
   <div class="breathe">
     <h1>Sync your breathing with this</h1>
 
-    <transition name="fade" mode="out-in" >
+    <transition name="fade" mode="out-in">
       <p key="in" v-if="state == states.in">Breathe in</p>
       <p key="out" v-if="state == states.out">Breathe out</p>
       <p key="hold" v-if="state == states.holding">Hold</p>
@@ -23,11 +23,14 @@ let states = {
   holding: 3
 };
 export default {
-  name: "HelloWorld",
+  name: "breathe",
   computed: {
     animatedScale: function() {
       return this.scale.toFixed(3);
     }
+  },
+  props: {
+    duration: Number
   },
   data() {
     return {
@@ -52,17 +55,19 @@ export default {
         this.state = states.in;
         newScale = 1;
       }
-      gsap.to(this.$data, { duration: 3, scale: newScale, ease: "slow" }).delay(0.3);
+      gsap
+        .to(this.$data, { duration: 3, scale: newScale, ease: "slow" })
+        .delay(0.3);
 
       setTimeout(() => {
         this.hold(newState);
-      }, 3000);
+      }, this.duration * 1000);
     },
     hold(newState) {
       this.state = states.holding;
       setTimeout(() => {
         this.breathe(newState);
-      }, 3000);
+      }, this.duration * 1000);
     }
   }
 };
@@ -80,5 +85,9 @@ svg {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+.breathe {
+	margin: 2rem;
 }
 </style>
