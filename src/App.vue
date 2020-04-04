@@ -50,6 +50,9 @@
 <script>
 import Breathe from "./components/Breathe.vue";
 import { Slide } from "vue-burger-menu";
+import Vue from "vue";
+import VueCookie from "vue-cookie";
+Vue.use(VueCookie);
 
 export default {
   name: "App",
@@ -60,7 +63,7 @@ export default {
   data() {
     return {
       duration: 4,
-      isDarkMode: false
+      isDarkMode: VueCookie.get("isDarkMode") || false
     };
   },
   computed: {
@@ -74,6 +77,7 @@ export default {
     },
     toggleTheme() {
       this.isDarkMode = !this.isDarkMode;
+      this.$cookie.set("isDarkMode", this.isDarkMode);
     }
   }
 };
