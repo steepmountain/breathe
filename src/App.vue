@@ -62,7 +62,7 @@ export default {
   },
   data() {
     return {
-      duration: 4,
+      duration: VueCookie.get("duration") || 4,
       isDarkMode: VueCookie.get("isDarkMode") || false
     };
   },
@@ -74,6 +74,7 @@ export default {
   methods: {
     setDuration(event) {
       this.duration = Number.parseInt(event.target.value);
+      this.$cookie.set("duration", this.duration);
     },
     toggleTheme() {
       this.isDarkMode = !this.isDarkMode;
