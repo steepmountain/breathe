@@ -62,8 +62,8 @@ export default {
   },
   data() {
     return {
-      duration: VueCookie.get("duration") || 4,
-      isDarkMode: VueCookie.get("isDarkMode") || false
+      duration: Number.parseInt(VueCookie.get("duration")) || 4,
+      isDarkMode: (VueCookie.get("isDarkMode") == 'true') || false
     };
   },
   computed: {
