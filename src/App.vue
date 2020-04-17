@@ -3,6 +3,7 @@
     <div class="burger">
       <Slide right>
         <div class="menu">
+            <p>Brightness</p>
           <input class="button" type="button" :value="modeText" @click="toggleTheme" />
           <div>
             <p>Duration</p>
@@ -37,6 +38,7 @@
           </div>
           <div>
             <p>Music</p>
+            <span class="credit">By <a href="bensound.com" target="_blank">bensound.com</a></span>
             <input class="button" type="button" :value="modeMusic" @click="toggleMusic" />
           </div>
           <p>
@@ -144,6 +146,10 @@ h1 {
   justify-content: space-evenly;
 }
 
+.menu p {
+    margin-bottom: 0;
+}
+
 #app.dark {
   color: white !important;
   background-color: black;
@@ -189,5 +195,10 @@ a:visited {
 body {
   padding: 0;
   margin: 0;
+}
+
+.credit {
+    display: block;
+    font-size: 0.8rem;
 }
 </style>
