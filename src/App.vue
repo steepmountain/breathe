@@ -35,6 +35,10 @@
               :class="{active: duration == 6}"
             />
           </div>
+          <div>
+            <p>Music</p>
+            <input class="button" type="button" :value="modeMusic" @click="toggleMusic" />
+          </div>
           <p>
             <a
               href="https://www.healthline.com/health/box-breathing"
@@ -52,6 +56,7 @@ import Breathe from "./components/Breathe.vue";
 import { Slide } from "vue-burger-menu";
 import Vue from "vue";
 import VueCookie from "vue-cookie";
+import { Howl } from "howler";
 Vue.use(VueCookie);
 
 export default {
@@ -63,12 +68,29 @@ export default {
   data() {
     return {
       duration: Number.parseInt(VueCookie.get("duration")) || 4,
-      isDarkMode: (VueCookie.get("isDarkMode") == 'true') || false
+      isDarkMode: VueCookie.get("isDarkMode") == "true" || false,
+      isPlayingMusic: VueCookie.get("isPlayingMusic") == "true" || false,
+      music: null
     };
+  },
+  mounted() {
+    this.music = new Howl({
+      src: require("./assets/music/bensound-relaxing.mp3"),
+      loop: true,
+      volume: 0
+    });
+
+    this.music.play();
+    if (this.isPlayingMusic) {
+        this.music.fade(0, 0.5, 500);
+    }
   },
   computed: {
     modeText() {
       return this.isDarkMode ? "Go light" : "Go dark";
+    },
+    modeMusic() {
+      return this.isPlayingMusic ? "Turn off" : "Turn on";
     }
   },
   methods: {
@@ -79,6 +101,16 @@ export default {
     toggleTheme() {
       this.isDarkMode = !this.isDarkMode;
       this.$cookie.set("isDarkMode", this.isDarkMode);
+    },
+    toggleMusic() {
+      this.isPlayingMusic = !this.isPlayingMusic;
+      this.$cookie.set("isPlayingMusic", this.isPlayingMusic);
+
+      if (this.isPlayingMusic) {
+        this.music.fade(0, 0.5, 800);
+      } else {
+        this.music.fade(0.5, 0, 800);
+      }
     }
   }
 };
@@ -86,7 +118,7 @@ export default {
 
 <style>
 .bm-burger-bars {
-    background-color: #999dad;
+  background-color: #999dad;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -96,7 +128,7 @@ export default {
   color: #2c3e50;
   height: 100vh;
   transition: background-color 0.5s;
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
 }
@@ -122,10 +154,10 @@ h1 {
   background-color: white;
 }
 
-a, a:visited {
+a,
+a:visited {
   color: white;
 }
-
 
 .button {
   /* default for <button>, but useful for <a> */
