@@ -7,34 +7,16 @@
           <input class="button" type="button" :value="modeText" @click="toggleTheme" />
           <div>
             <p>Duration</p>
-            <input
-              class="button"
-              type="button"
-              value="3"
-              @click="setDuration"
-              :class="{active: duration == 3}"
-            />
-            <input
-              class="button"
-              type="button"
-              value="4"
-              @click="setDuration"
-              :class="{active: duration == 4}"
-            />
-            <input
-              class="button"
-              type="button"
-              value="5"
-              @click="setDuration"
-              :class="{active: duration == 5}"
-            />
-            <input
-              class="button"
-              type="button"
-              value="6"
-              @click="setDuration"
-              :class="{active: duration == 6}"
-            />
+            <input 
+                type="range"
+                min="1"
+                max="10"
+                step="1"
+                @change="setDuration"
+                :value="duration"
+                name="duration"
+            >
+            <input :value="duration" />
           </div>
           <div>
             <p>Music</p>
